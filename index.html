@@ -1,33 +1,42 @@
+<!doctype html>
+<html lang="ja">
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="stylesheets/index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-</head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-<div class="top-wrapper">
-  <%= image_tag "IMG_2030.jpeg", class: "top-image"%>
-  <div class="overlay-box">
-    <div class="zemi logo">
-      <%= image_tag "oikawa_logo_transparent.png", class: "top-logo" %>
-    </div>
-    <div class="overlay-text">
-      <br><br>
-      <p class="line1">社会科</p>
-      <p class="line2">公共市民学専修</p><br><br>
-      <p class="line3">及川ゼミ</p>
+  <!-- Google Fonts（Zen Maru Gothic / Kavoon）-->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&family=Kavoon&display=swap" rel="stylesheet">
+
+  <!-- 相対パスでCSSを読む（先頭 / は使わない） -->
+  <link rel="stylesheet" href="./stylesheets/index.css" />
+
+  <title>及川ゼミ</title>
+</head>
+<body>
+
+  <div class="top-wrapper">
+    <!-- ERBの image_tag を <img> に -->
+    <img src="./images/IMG_2030.jpeg" alt="" class="top-image" />
+    <div class="overlay-box">
+      <div class="zemi logo">
+        <img src="./images/oikawa_logo_transparent.png" alt="及川ゼミロゴ" class="top-logo" />
+      </div>
+      <div class="overlay-text">
+        <br><br>
+        <p class="line1">社会科</p>
+        <p class="line2">公共市民学専修</p><br><br>
+        <p class="line3">及川ゼミ</p>
+      </div>
     </div>
   </div>
-</div>
 
+  <section class="theme">
+    <img src="./images/風岡トップ.jpg" alt="" class="responsive-image" />
+  </section>
 
+  <!-- 余計な閉じタグ </div> を削除済み -->
 
-<section class="theme">
-
-  <%= image_tag "風岡トップ.jpg", class: "responsive-image" %>
-</section>
-
-
-</div>
+</body>
+</html>
 
