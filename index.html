@@ -6,205 +6,28 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 </head>
 
-<div class="teacher-top">
-  <%= image_tag "IMG_2030.jpeg", class: "top-image" %>
-  <div class="teacheroverlay-box">
-    <div class="outlineoverlay-text">
-      <h1>ゼ　ミ　概　要</h1>
+<div class="top-wrapper">
+  <%= image_tag "IMG_2030.jpeg", class: "top-image"%>
+  <div class="overlay-box">
+    <div class="zemi logo">
+      <%= image_tag "oikawa_logo_transparent.png", class: "top-logo" %>
+    </div>
+    <div class="overlay-text">
+      <br><br>
+      <p class="line1">社会科</p>
+      <p class="line2">公共市民学専修</p><br><br>
+      <p class="line3">及川ゼミ</p>
     </div>
   </div>
 </div>
 
 
-<!-- 及川ゼミとは -->
-<section class="activities" id="about-seminar">
-  <div class="bar-title">
-  <h2 class="bar-title__text">及川ゼミとは</h2>
-    </div>
 
- 
-      <div class="sticky-noteblue">
-        <div class="tapeblue"></div>
-        <div class="note-content">
-          <h2>テーマ</h2>
-          <p>経済学とデータ分析で身近な現象・課題を読み解く</p>
-          <br>
-          <h2>目標</h2>
-          <p>身近な現象や課題について、
-          「仮説設定 → データ収集 → 分析・解釈 → 論文執筆」
-          のプロセスを自分で行う力を身につける</p>
-        </div>
-      </div>
-    </div>
-</section>
+<section class="theme">
 
-<!-- 教員紹介 -->
-<div class="bar-title">
-  <h2 class="bar-title__text">教員紹介</h2>
-</div>
-<div class="section">
-  <div class="teacher-about-flex">
-    <!-- 教員の写真 -->
-    <div class="teacher-image-wrapper">
-      <%= image_tag "及川先生　スリム.png", class: "teacher-image" %>
-    </div>
-
-    <!-- 教員の紹介付箋 -->
-    <div class="teacher-fusen-wrapper">
-      <div class="sticky-notegreen">
-        <div class="tapegreen"></div>
-        <div class="note-content">
-          <h1><strong>及川　雅斗</strong></h1>
-          <br>
-          <h2>所属</h2>
-          <p>早稲田大学<br>教育・総合科学学術院 教育学部</p>
-          <br>
-          <h2>専門</h2>
-          <p>医療経済学・応用ミクロ経済学</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 授業頻度セクション -->
-<section class="activities" id="frequency">
-  <div class="bar-title">
-  <h2 class="bar-title__text">授業頻度</h2>
-  </div>
-
-
-  <div class="activities__content">
-    <dl class="about-list">
-      <div class="about-item">
-        <dt>3年生</dt>
-        <dd>水曜日3限<br>※3年生春学期のみ「公共市民学研究（プログラム評価のためのデータ分析）」の履修が必須です。</dd>
-      </div>
-      <div class="about-item">
-        <dt>4年生</dt>
-        <dd>水曜日4限</dd>
-      </div>
-    </dl>
-  </div>
+  <%= image_tag "風岡トップ.jpg", class: "responsive-image" %>
 </section>
 
 
-<!-- 活動内容セクション -->
-<section class="activities" id="activities">
-  <div class="bar-title">
-  <h2 class="bar-title__text">活動内容</h2>
-  </div>
-
-
-  <div class="activities__list">
-
-
-
-    <!-- 1. 教科書輪読 -->
-    <article class="activity">
-      <div class="activity__media">
-        <%= image_tag "教科書輪読.jpg" %>
-      </div>
-      <div class="activity__body">
-        <h3 class="activity__heading">教科書輪読</h3>
-        <p class="activity__text">
-          『アメリカの大学生が学んでいる「伝え方」の教科書』や『経済論文の書き方』を題材とし、章ごとにテキストを区切って輪読を行います。5つのグループに分かれ、それぞれ担当箇所を精読し、まとめや解説を発表します。
-        </p>
-      </div>
-    </article>
-
-    <!-- 2. グループ論文 -->
-    <article class="activity">
-      <div class="activity__media">
-         <%= image_tag "グループ論文.jpg" %>
-      </div>
-      <div class="activity__body">
-        <h3 class="activity__heading">グループ論文</h3>
-        <p class="activity__text">
-          3つのグループに分かれ、それぞれが身近な社会問題や事象（例：学校ブランドと就職先の関係性など）を題材に、データ分析を用いた研究に取り組みます。最終的には、3年生の1月に他学部とのインゼミを実施し、各グループが研究成果を発表する予定です。
-        </p>
-      </div>
-    </article>
-
-    <!-- 3. 時事ネタ発表会 -->
-    <article class="activity">
-      <div class="activity__media">
-         <%= image_tag "日経新聞.jpg" %>
-      </div>
-      <div class="activity__body">
-        <h3 class="activity__heading">時事ネタ発表会</h3>
-        <p class="activity__text">
-          毎回の授業の冒頭に1〜2人が担当し、各自が興味を持ったテーマを取り上げます。「記事を選んだ理由」「疑問に思ったこと」「社会的重要性」を中心に発表し、その後ゼミ生と意見を交換します。
-        </p>
-      </div>
-    </article>
-
-    <!-- 4. Stataの学習 -->
-    <article class="activity">
-      <div class="activity__media">
-        <%= image_tag "統計ソフト.png" %>
-      </div>
-      <div class="activity__body">
-        <h3 class="activity__heading">統計ソフト Stata の学習</h3>
-        <p class="activity__text">
-          グループ論文や卒業論文で使用する統計ソフトStataについては、3年生の春学期に開講される「公共市民学研究（プログラム評価のためのデータ分析）」や、ゼミ後半の授業で扱います。実際のオープンデータを用いながら、基礎から学習を進めます。
-        </p>
-      </div>
-    </article>
-
-    <!-- 5. ゼミ合宿 -->
-    <article class="activity">
-      <div class="activity__media">
-         <%= image_tag "ゼミ合宿.jpg" %>
-      </div>
-      <div class="activity__body">
-        <h3 class="activity__heading">ゼミ合宿</h3>
-        <p class="activity__text">
-          ゼミの有志と教員で、早稲田セミナーハウスにて1泊2日のゼミ合宿を行います。グループ論文の構想発表会をはじめ、バスケットボールなどのレクリエーション、観光、BBQなど多彩なイベントを通じて、親睦を深めます。
-        </p>
-      </div>
-    </article>
-  </div>
-</section>
-
-<!-- カリキュラム -->
-<section class="activities" id="curriculum">
-  <div class="bar-title">
-  <h2 class="bar-title__text">カリキュラム</h2>
-  </div>
-
-
-  <div class="curriculum__frame">
-    <div class="curriculum__media">
-      <%= image_tag "カリキュラム.png", alt: "カリキュラム", class: "curriculum__img" %>
-    </div>
-  </div>
-</section>
-
-<div class="bar-title">
-  <h2 class="bar-title__text">ゼミの雰囲気</h2>
-</div>
-
-
-
-
-
-
-
-
-<!-- ゼミ生の声 -->
-<div class="section">
-  <div class="sticky-noteorange">
-    <div class="tapeorange"></div>
-    <div class="note-content">
-      <h1><strong>ゼミ生の声</strong></h1>
-      <br>
-      <p>・先生がどんな質問にも丁寧に答えてくれる<br>
-      ・先生が優しい<br>
-      ・本格的なデータ分析ができる<br>
-      ・発言しやすい<br>
-      ・etc</p>
-    </div>
-  </div>
 </div>
 
