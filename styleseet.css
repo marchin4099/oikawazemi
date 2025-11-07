@@ -1,10 +1,482 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #FFFAF0;
+  font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+html {
+  -webkit-text-size-adjust: 100%; /* もしくは none（強めに止める） */
+  text-size-adjust: 100%;
+}
+
+header {
+  position: relative;
+  background-color: #003366;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 3%;
+  padding-right: 3%;
+  color: white;
+  height: 60px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.header-list {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(20px, 4vw, 60px);
+  background-color: #003366;
+  color: white;
+}
+
+.header-list a {
+  color: white;
+  text-decoration: none;
+  font-family: 'Kavoon', sans-serif;
+  font-size: 16px;   /* ここをpx固定に */
+  line-height: 1.2;  /* 行高も明示すると崩れにくい */
+}
+
+.header-list a:hover {
+  color: #00a2ff;
+}
+
+/* サブメニュー共通 */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.dropdown > a {
+  font-size: 16px;   /* ここをpx固定に */
+  line-height: 1.2;  /* 行高も明示すると崩れにくい */
+  padding: 10px;
+  display: inline-block;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+}
+
+/* サブメニュー */
+.links {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #003366;
+  padding: 0.5rem 0;
+  width: 120px;
+  z-index: 3;
+  border-radius: 6px;
+  flex-direction: column;
+  text-align: center;
+}
+
+.links a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.links a:hover {
+  background-color: #003366;
+  color: #00a2ff;
+}
+
+/* PC：hoverで展開 */
+@media screen and (min-width: 1280px) {
+  .dropdown:hover .links {
+    display: flex;
+  }
+}
+
+/* ← デフォルトでは非表示（PC向け） */
+.menu-toggle {
+  display: none;
+  color: white;
+  -webkit-text-size-adjust: 100%; /* iPhoneの自動文字拡大を無効化 */
+}
+
+/* ========== スマホ用スタイル ========== */
+@media screen and (max-width: 1279px) {
+  .menu-toggle{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:60px;
+  font-size:40px;
+  line-height:1;
+  color:#fff;
+  -webkit-text-size-adjust:100%;
+
+}
+
+/* iPhone/iPadだけ微調整（値は-2〜-4pxで微調整してOK） */
+@supports (-webkit-touch-callout: none) {
+  .menu-toggle{ transform: translateY(-5px); }
+}
+
+
+
+  .header-list {
+    display: none;
+    flex-direction: column;
+    background-color: #003366;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+  }
+
+  .header-list.active {
+    display: flex;
+  }
+
+  .dropdown {
+    width: 100%;
+  }
+
+  .dropdown:hover .links {
+    display: none !important; /* hover 無効化 */
+  }
+
+  .dropdown.open .links {
+    display: flex !important;
+    position: static;
+    transform: none;
+    width: 100%;
+    padding: 0.5rem 0;
+    background-color: #003366;
+  }
+
+  .links {
+    display: none;
+    position: static;
+    background-color: #002244;
+    width: 100%;
+    padding: 0.5rem 0;
+  }
+
+  .header-list a,
+  .dropdown > a {
+    padding: 1rem;
+    text-align: center;
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;   /* ここをpx固定に */
+    line-height: 1.2;  /* 行高も明示すると崩れにくい */
+    
+  }
+
+  .links a {
+    padding: 0.75rem 1rem;
+    text-align: center;
+  }
+
+  .caret {
+  margin-left: 0.5rem;
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+/* 開いたときに上向きに */
+.dropdown.open .caret {
+  transform: rotate(180deg);
+}
+}
+
+.top-wrapper {
+  position: relative;
+  width: 100%;
+  height: 37.5rem;  /* 600px ÷ 16 = 37.5rem */
+  overflow: hidden;
+}
+
+.top-image {
+  width: 100%;        /* 横幅いっぱい */
+  height: 37.5rem;      /* 固定高さ */
+  object-fit: cover;  /* はみ出す部分をトリミング */
+  display: block;
+  margin: 0;
+  position: relative;
+  z-index: -1;
+}
+
+@media screen and (max-width: 768px) {
+  .top-wrapper {
+    height: 360px;       /* スマホでは少し低めに */
+    object-fit: cover;   /* 画像が潰れないようにカバー */
+
+  .overlay-text {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-family: sans-serif;
+  line-height: 1.2;
+   margin-top: 8rem; /* ← ここでロゴとの余白を調整 */
+}
+
+.overlay-text .line3 {
+  font-size: 2rem;
+  font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+.overlay-text .line1,
+.overlay-text .line2 {
+  font-size: 1rem;
+  font-family: 'Zen Maru Gothic', sans-serif;
+}
+  }
+}
+
+.overlay-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* 半透明の黒塗り */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.overlay-text {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-family: sans-serif;
+  line-height: 1.6;
+   margin-top: 5rem; /* ← ここでロゴとの余白を調整 */
+}
+
+.overlay-text .line3 {
+  font-size: 3rem;
+  font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+.overlay-text .line1,
+.overlay-text .line2 {
+  font-size: 1.5rem;
+  font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+.top-logo {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: auto;
+  min-width: 10rem;
+}
+
+
+@media screen and (max-width: 600px) {
+  .overlay-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* 半透明の黒塗り */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  white-space: nowrap; /* 改行防止 */
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-copy {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-top: 0.5rem;
+}
+
+.insta-icon {
+  width: 3rem;      /* アイコンの横幅 */
+  height: auto;     /* 縦横比を保つ */
+  margin: 1rem;
+  vertical-align: middle;
+}
+
+.line-icon {
+  width: 3rem;           /* アイコンの横幅 */
+  height: auto;          /* 縦横比を保つ */
+  margin: 1rem;
+  vertical-align: middle;
+  border-radius: 50%;    /* ← これで丸くなる！ */
+  overflow: hidden;      /* はみ出し防止（念のため） */
+}
+
+
+
+
+  /* セクション見出し h1, h2 など */
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+  }
+
+ .image-text-pairs-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+.image-text-pair p {
+  
+  font-size: 0.5rem;
+  color: #333;
+}
+
+
+
+
+.section {
+  margin: 4rem auto;
+  padding: 0 1rem;
+  max-width: 1000px;
+}
+
+@media screen and (max-width: 600px) {
+  .section {
+    margin: 4rem auto;
+    padding: 0 1rem;
+  }
+}
+
+
+
+.header-nav {
+  display: none;
+}
+
+
+@media (max-width: 1440px) {
+  .header-nav {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    background: #003366;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .header-nav a {
+    flex: 0 0 auto;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 0.7rem;
+  }
+}
+
+
+.responsive-image {
+  width: 90%;   /* 横幅をデバイス幅にフィットさせる */
+  height: auto;  /* アスペクト比を保ちながら高さを自動調整 */
+  display: block; /* 下に余白が出るのを防ぐため */
+  margin: 0 auto;
+  border-radius: 0.8rem;
+}
+
+/* 全体のラッパー */
+.top-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+
+
+
+/* テーマを確実に中央＆独立化 */
+.theme{
+  width: 100%;
+  max-width: 1100px;   /* 好みで調整 */
+  box-sizing: border-box;
+  margin: 3rem auto 0; /* 中央寄せ */
+  padding: 0 1rem;
+  display: block;
+  float: none;         /* 右寄りの原因が float の場合に無効化 */
+  clear: both;         /* 直前の float / 横並びの影響を断つ */
+  text-align: center;
+}
+
+/* 画像も中央固定 */
+.theme .responsive-image{
+  display: block;
+  margin: 1rem auto 0;
+  max-width: 100%;
+  height: auto;
+}
+
+
+
+
+
+
+
 .sticky-noteblue{
   position: relative;
   width: min(30rem, 92vw); /* 画面狭いときは縮む */
   min-height: 30rem;
   background-color: #b3e5f2;
   margin: 2rem auto;       /* ← 横中央 */
-  display: block;          /* 念のため */
+  display: block;/* 念のため */
   box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,.2);
   border-radius: .2rem;
   padding: 1rem;
