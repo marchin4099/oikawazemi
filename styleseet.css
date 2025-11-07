@@ -1,27 +1,29 @@
+/* -------------------- ベース設定 -------------------- */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  background-color: #FFFAF0;
-  font-family: 'Zen Maru Gothic', sans-serif;
-}
-
 html {
-  -webkit-text-size-adjust: 100%; /* もしくは none（強めに止める） */
+  -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 
+body {
+  background-color: #FFFAF0;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  color: #333;
+}
+
+/* -------------------- ヘッダー -------------------- */
 header {
   position: relative;
   background-color: #003366;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 3%;
-  padding-right: 3%;
+  padding: 0 3%;
   color: white;
   height: 60px;
 }
@@ -37,23 +39,21 @@ h1 {
   align-items: center;
   flex-wrap: wrap;
   gap: clamp(20px, 4vw, 60px);
-  background-color: #003366;
-  color: white;
 }
 
 .header-list a {
   color: white;
   text-decoration: none;
   font-family: 'Kavoon', sans-serif;
-  font-size: 16px;   /* ここをpx固定に */
-  line-height: 1.2;  /* 行高も明示すると崩れにくい */
+  font-size: 16px;
+  line-height: 1.2;
 }
 
 .header-list a:hover {
   color: #00a2ff;
 }
 
-/* サブメニュー共通 */
+/* -------------------- ドロップダウン -------------------- */
 .dropdown {
   position: relative;
   display: inline-block;
@@ -61,16 +61,14 @@ h1 {
 }
 
 .dropdown > a {
-  font-size: 16px;   /* ここをpx固定に */
-  line-height: 1.2;  /* 行高も明示すると崩れにくい */
+  font-size: 16px;
   padding: 10px;
   display: inline-block;
-  cursor: pointer;
   color: white;
   text-decoration: none;
+  cursor: pointer;
 }
 
-/* サブメニュー */
 .links {
   display: none;
   position: absolute;
@@ -80,60 +78,44 @@ h1 {
   background-color: #003366;
   padding: 0.5rem 0;
   width: 120px;
-  z-index: 3;
   border-radius: 6px;
   flex-direction: column;
   text-align: center;
+  z-index: 3;
 }
 
 .links a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
   padding: 10px;
   color: white;
   text-decoration: none;
 }
 
 .links a:hover {
-  background-color: #003366;
   color: #00a2ff;
 }
 
 /* PC：hoverで展開 */
-@media screen and (min-width: 1280px) {
+@media (min-width: 1280px) {
   .dropdown:hover .links {
     display: flex;
   }
 }
 
-/* ← デフォルトでは非表示（PC向け） */
+/* -------------------- スマホ用メニュー -------------------- */
 .menu-toggle {
   display: none;
   color: white;
-  -webkit-text-size-adjust: 100%; /* iPhoneの自動文字拡大を無効化 */
 }
 
-/* ========== スマホ用スタイル ========== */
-@media screen and (max-width: 1279px) {
-  .menu-toggle{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  height:60px;
-  font-size:40px;
-  line-height:1;
-  color:#fff;
-  -webkit-text-size-adjust:100%;
-
-}
-
-/* iPhone/iPadだけ微調整（値は-2〜-4pxで微調整してOK） */
-@supports (-webkit-touch-callout: none) {
-  .menu-toggle{ transform: translateY(-5px); }
-}
-
-
+@media (max-width: 1279px) {
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    font-size: 40px;
+  }
 
   .header-list {
     display: none;
@@ -154,10 +136,6 @@ h1 {
     width: 100%;
   }
 
-  .dropdown:hover .links {
-    display: none !important; /* hover 無効化 */
-  }
-
   .dropdown.open .links {
     display: flex !important;
     position: static;
@@ -172,7 +150,6 @@ h1 {
     position: static;
     background-color: #002244;
     width: 100%;
-    padding: 0.5rem 0;
   }
 
   .header-list a,
@@ -180,106 +157,95 @@ h1 {
     padding: 1rem;
     text-align: center;
     display: block;
-    color: white;
-    text-decoration: none;
-    font-size: 16px;   /* ここをpx固定に */
-    line-height: 1.2;  /* 行高も明示すると崩れにくい */
-    
+    font-size: 16px;
+    line-height: 1.2;
   }
 
   .links a {
     padding: 0.75rem 1rem;
-    text-align: center;
   }
 
   .caret {
-  margin-left: 0.5rem;
-  font-size: 1rem;
-  transition: transform 0.3s ease;
-  display: inline-block;
+    margin-left: 0.5rem;
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
+
+  .dropdown.open .caret {
+    transform: rotate(180deg);
+  }
 }
 
-/* 開いたときに上向きに */
-.dropdown.open .caret {
-  transform: rotate(180deg);
-}
-}
-
+/* -------------------- トップ画像 -------------------- */
 .top-wrapper {
   position: relative;
   width: 100%;
-  height: 37.5rem;  /* 600px ÷ 16 = 37.5rem */
+  height: 37.5rem;
   overflow: hidden;
 }
 
 .top-image {
-  width: 100%;        /* 横幅いっぱい */
-  height: 37.5rem;      /* 固定高さ */
-  object-fit: cover;  /* はみ出す部分をトリミング */
+  width: 100%;
+  height: 37.5rem;
+  object-fit: cover;
   display: block;
-  margin: 0;
-  position: relative;
   z-index: -1;
 }
 
-@media screen and (max-width: 768px) {
+/* スマホ用 */
+@media (max-width: 768px) {
   .top-wrapper {
-    height: 360px;       /* スマホでは少し低めに */
-    object-fit: cover;   /* 画像が潰れないようにカバー */
+    height: 360px;
+    object-fit: cover;
+  }
 
   .overlay-text {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-family: sans-serif;
-  line-height: 1.2;
-   margin-top: 8rem; /* ← ここでロゴとの余白を調整 */
-}
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    line-height: 1.2;
+    margin-top: 8rem;
+  }
 
-.overlay-text .line3 {
-  font-size: 2rem;
-  font-family: 'Zen Maru Gothic', sans-serif;
-}
+  .overlay-text .line3 {
+    font-size: 2rem;
+  }
 
-.overlay-text .line1,
-.overlay-text .line2 {
-  font-size: 1rem;
-  font-family: 'Zen Maru Gothic', sans-serif;
-}
+  .overlay-text .line1,
+  .overlay-text .line2 {
+    font-size: 1rem;
   }
 }
 
+/* -------------------- オーバーレイ -------------------- */
 .overlay-box {
   position: absolute;
   top: 0;
   right: 0;
   width: 30%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* 半透明の黒塗り */
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
 }
 
 .overlay-text {
   color: white;
   text-align: center;
   font-weight: bold;
-  font-family: sans-serif;
   line-height: 1.6;
-   margin-top: 5rem; /* ← ここでロゴとの余白を調整 */
+  margin-top: 5rem;
 }
 
 .overlay-text .line3 {
   font-size: 3rem;
-  font-family: 'Zen Maru Gothic', sans-serif;
 }
 
 .overlay-text .line1,
 .overlay-text .line2 {
   font-size: 1.5rem;
-  font-family: 'Zen Maru Gothic', sans-serif;
 }
 
 .top-logo {
@@ -288,28 +254,34 @@ h1 {
   left: 50%;
   transform: translateX(-50%);
   width: 40%;
-  height: auto;
   min-width: 10rem;
 }
 
-
-@media screen and (max-width: 600px) {
+/* スマホではオーバーレイ全面に */
+@media (max-width: 600px) {
   .overlay-box {
-  position: absolute;
-  top: 0;
-  right: 0;
+    width: 100%;
+  }
+}
+
+/* -------------------- テーマセクション -------------------- */
+.theme {
   width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* 半透明の黒塗り */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
+  max-width: 1100px;
+  margin: 3rem auto 0;
+  padding: 0 1rem;
+  text-align: center;
 }
 
-
+.responsive-image {
+  width: 90%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 0.8rem;
 }
 
+/* -------------------- フッター -------------------- */
 footer {
   background-color: #333;
   color: white;
@@ -328,7 +300,7 @@ footer {
 .footer-links a {
   color: white;
   text-decoration: none;
-  white-space: nowrap; /* 改行防止 */
+  white-space: nowrap;
 }
 
 .footer-links a:hover {
@@ -341,506 +313,15 @@ footer {
   margin-top: 0.5rem;
 }
 
-.insta-icon {
-  width: 3rem;      /* アイコンの横幅 */
-  height: auto;     /* 縦横比を保つ */
+.insta-icon,
+.line-icon {
+  width: 3rem;
+  height: auto;
   margin: 1rem;
-  vertical-align: middle;
 }
 
 .line-icon {
-  width: 3rem;           /* アイコンの横幅 */
-  height: auto;          /* 縦横比を保つ */
-  margin: 1rem;
-  vertical-align: middle;
-  border-radius: 50%;    /* ← これで丸くなる！ */
-  overflow: hidden;      /* はみ出し防止（念のため） */
-}
-
-
-
-
-  /* セクション見出し h1, h2 など */
-  h1 {
-    font-size: 1.2rem;
-  }
-
-  h2 {
-    font-size: 1rem;
-  }
-
- .image-text-pairs-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-.image-text-pair p {
-  
-  font-size: 0.5rem;
-  color: #333;
-}
-
-
-
-
-.section {
-  margin: 4rem auto;
-  padding: 0 1rem;
-  max-width: 1000px;
-}
-
-@media screen and (max-width: 600px) {
-  .section {
-    margin: 4rem auto;
-    padding: 0 1rem;
-  }
-}
-
-
-
-.header-nav {
-  display: none;
-}
-
-
-@media (max-width: 1440px) {
-  .header-nav {
-    display: flex;
-    overflow-x: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    background: #003366;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #ddd;
-  }
-
-  .header-nav a {
-    flex: 0 0 auto;
-    padding: 0.75rem 1rem;
-    text-decoration: none;
-    color: #ffffff;
-    font-size: 0.7rem;
-  }
-}
-
-
-.responsive-image {
-  width: 90%;   /* 横幅をデバイス幅にフィットさせる */
-  height: auto;  /* アスペクト比を保ちながら高さを自動調整 */
-  display: block; /* 下に余白が出るのを防ぐため */
-  margin: 0 auto;
-  border-radius: 0.8rem;
-}
-
-/* 全体のラッパー */
-.top-sections {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-
-
-
-/* テーマを確実に中央＆独立化 */
-.theme{
-  width: 100%;
-  max-width: 1100px;   /* 好みで調整 */
-  box-sizing: border-box;
-  margin: 3rem auto 0; /* 中央寄せ */
-  padding: 0 1rem;
-  display: block;
-  float: none;         /* 右寄りの原因が float の場合に無効化 */
-  clear: both;         /* 直前の float / 横並びの影響を断つ */
-  text-align: center;
-}
-
-/* 画像も中央固定 */
-.theme .responsive-image{
-  display: block;
-  margin: 1rem auto 0;
-  max-width: 100%;
-  height: auto;
-}
-
-
-
-
-
-
-
-.sticky-noteblue{
-  position: relative;
-  width: min(30rem, 92vw); /* 画面狭いときは縮む */
-  min-height: 30rem;
-  background-color: #b3e5f2;
-  margin: 2rem auto;       /* ← 横中央 */
-  display: block;/* 念のため */
-  box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,.2);
-  border-radius: .2rem;
-  padding: 1rem;
-  margin-top: 3.5rem;
-}
-
-.tapeblue {
-  position: absolute;
-  top: -2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12rem;
-  height: 4rem;
-  background-color: #66bad1; /* 上のテープ色 */
-  
-}
-
-.note-content {
-  padding: 2.5rem 1rem 1rem; /* 上部はテープ分だけ余白 */
-  position: relative;
-  font-family: "Zen Maru Gothic", sans-serif;
-}
-
-.note-content h1 {
-  font-size: 2.4rem;
-  text-align: center;
-}
-
-.note-content h2 {
-  font-size: 1.9rem;
-}
-
-.note-content p {
-  font-size: 1.3rem;
-}
-
-@media screen and (max-width: 600px) {
-  .sticky-noteblue {
-    width: 90vw;          /* スマホ画面に合わせる */
-    min-height: 90vw;     /* 高さも割合で調整（必要に応じて変更） */
-    padding: 1.5rem 1rem;
-  }
-
-  .tapeblue {
-    width: 8rem;          /* テープを少し小さくする */
-    height: 2.5rem;
-    top: -1.25rem;
-  }
-
-  .note-content {
-    font-size: 0.9rem;    /* フォント少し小さめ */
-    padding-top: 2rem;    /* テープとの距離調整 */
-  }
-
-  .note-content h1 {
-    font-size: 1.8rem;
-  }
-
-  .note-content h2 {
-    font-size: 1.5rem;
-  }
-
-  .note-content p {
-    font-size: 1.1rem;
-  }
-}
-
-.sticky-notegreen {
-  position: relative;
-  width: 30rem;
-  height: auto;
-  min-height: 30rem; /* ← 高さの下限を設定 */
-  background-color: #d5ef74; /* 黄緑 */
-  margin: 2rem auto;
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
-  border-radius: 0.2rem;
-  padding: 1rem;
-}
-
-.tapegreen {
-  position: absolute;
-  top: -2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12rem;
-  height: 4rem;
-  background: #a9d64f;
-}
-
-@media screen and (max-width: 600px) {
-  .sticky-notegreen {
-    width: 90vw;          /* スマホ画面に合わせる */
-    min-height: 90vw;     /* 高さも割合で調整（必要に応じて変更） */
-    padding: 1.5rem 1rem;
-  }
-
-  .tapegreen {
-    width: 8rem;          /* テープを少し小さくする */
-    height: 2.5rem;
-    top: -1.25rem;
-  }
-
-  .note-content {
-    font-size: 0.9rem;    /* フォント少し小さめ */
-    padding-top: 2rem;    /* テープとの距離調整 */
-  }
-}
-
-
-
-.sticky-noteorange{
-  position: relative;
-  width: min(30rem, 92vw); /* 画面狭いときは縮む */
-  min-height: 30rem;
-  background-color: #ffd878;
-  margin: 2rem auto;       /* ← 横中央 */
-  display: block;          /* 念のため */
-  box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,.2);
-  border-radius: .2rem;
-  padding: 1rem;
-  margin-top: 3.5rem;
-}
-
-.tapeorange {
-  position: absolute;
-  top: -2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12rem;
-  height: 4rem;
-  background: #f6a00a;
-}
-
-@media screen and (max-width: 600px) {
-  .sticky-noteorange {
-    width: 90vw;          /* スマホ画面に合わせる */
-    min-height: 90vw;     /* 高さも割合で調整（必要に応じて変更） */
-    padding: 1.5rem 1rem;
-  }
-
-  .tapeorange {
-    width: 8rem;          /* テープを少し小さくする */
-    height: 2.5rem;
-    top: -1.25rem;
-  }
-
-  .note-content {
-    font-size: 0.9rem;    /* フォント少し小さめ */
-    padding-top: 2rem;    /* テープとの距離調整 */
-  }
-}
-
-
-
-.teacher-about-flex {
-  display: flex;
-  justify-content: center;
-  align-items: center; /* ← ここを flex-start → center に変更！ */
-  flex-wrap: nowrap;
-}
-
-.teacher-fusen-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-
-/* スマホ・タブレット対応 */
-@media screen and (max-width: 1024px) {
-  .teacher-about-flex {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .teacher-fusen-wrapper {
-    width: 90vw;
-  }
-}
-
-
-.activities__head {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.activities__eyebrow {
-  font-size: 0.8rem;
-  color: #666;
-  letter-spacing: 0.15em;
-}
-
-.activities__title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-top: 0.5rem;
-}
-
-/* ====== リスト ====== */
-.activities__list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-/* ====== 各活動カード ====== */
-.activity {
-  display: grid;
-  grid-template-columns: 280px 1fr; /* 写真左・説明右 */
-  gap: 1.5rem;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  min-height: 240px;  /* ★枠の高さを固定 */
-  box-sizing: border-box;
-}
-
-
-
-/* 枠サイズを固定して、どんな画像でも同じ見た目に */
-:root{
-  /* 好みで調整（デスクトップ / モバイル） */
-  --media-h-desktop: 200px;
-  --media-h-mobile:  220px;
-}
-
-.activity__media{
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 0.6rem;
+  border-radius: 50%;
   overflow: hidden;
-
-  /* ★ ここで高さを固定 */
-  height: var(--media-h-desktop);
 }
 
-/* 画像は枠いっぱいに、中央トリミング */
-.activity__media img{
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  /* 角も丸く見せたいなら継承でもOK */
-  border-radius: inherit;
-}
-
-/* スマホ・タブレットのときの高さ（必要なら調整） */
-@media (max-width: 768px){
-  .activity{
-    grid-template-columns: 1fr;   /* 画像→本文の縦並び（既に入れているなら不要） */
-    min-height: auto;
-  }
-  .activity__media{
-    height: var(--media-h-mobile); /* ★ モバイル用固定高さ */
-  }
-}
-
-
-.activity__body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.activity__heading {
-  font-size: 1.4rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.activity__text {
-  font-size: 1rem;
-  line-height: 1.7;
-  color: #333;
-}
-
-/* ====== スマホ対応 ====== */
-@media (max-width: 768px) {
-  .activity {
-    grid-template-columns: 1fr; /* スマホは縦並び */
-    min-height: auto;          /* 高さ制限解除 */
-  }
-  .activity__media {
-    margin-bottom: 1rem;
-  }
-}
-
-/* ====== 情報カード用の派生（授業頻度） ====== */
-.activity--info {
-  /* 既存の activity と同じ枠・レイアウトを踏襲 */
-  /* 固定感を少し強めるため高さを揃えたい場合はここで指定 */
-  min-height: 220px; /* 既存より少し低めでもOK。全カード統一なら揃えてください */
-}
-
-/* アイコンは少し小ぶりにして“情報感”を演出 */
-.activity--info .activity__media {
-  background: #f7f9ff;           /* うっすら色を変えて差別化（白系で一貫性） */
-  border: 1px solid #e3e8ff;
-}
-
-.activity--info .activity__media img {
-  width: 70%;     /* 通常カードより小さめ */
-  max-width: 140px;
-}
-
-/* 注意書き（※）のスタイル：本文より一段落とし、可読性を上げる */
-.activity__note {
-  margin-top: 0.6rem;
-  font-size: 0.92rem;
-  line-height: 1.7;
-  color: #555;
-  padding-left: 0.9rem;
-  border-left: 3px solid #dcdcdc;  /* 目線誘導のガイド */
-}
-
-
-/* 授業頻度セクション（本文だけのシンプル版） */
-#frequency .activities__content {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 1rem;
-  text-align: left;
-}
-
-#frequency .activities__text {
-  font-size: 1.05rem;
-  line-height: 1.8;
-  color: #333;
-}
-
-#frequency .activities__note {
-  margin-top: 0.8rem;
-  font-size: 0.95rem;
-  color: #555;
-  padding-left: 0.9rem;
-  border-left: 3px solid #dcdcdc;
-}
-
-
-/* ====== カリキュラム（枠付き） ====== */
-.curriculum__frame {
-  max-width: 1000px;          /* ページ中央に収める幅 */
-  margin: 0 auto;
-  padding: 1rem;
-}
-
-.curriculum__media {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 1rem;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.curriculum__img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 0.5rem;
-}
